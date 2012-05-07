@@ -29,7 +29,8 @@ Faye.StaticServer = Faye.Class({
       cache.digest  = cache.digest  || crypto.createHash('sha1').update(cache.content).digest('hex');
       cache.mtime   = cache.mtime   || fs.statSync(fullpath).mtime;
     } catch (e) {
-      response.writeHead(404, {});
+      response.writeHead(404, {"Connection":"close"});
+      response.write("resource not found");
       return response.end();
     }
     
